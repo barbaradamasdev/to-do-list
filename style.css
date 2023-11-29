@@ -7,6 +7,7 @@
 
     --pink-light: pink;
     --pink-dark:  rgb(235, 139, 155);
+    --purple: purple;
 }
 
 /* Reset */
@@ -29,15 +30,8 @@
     display: grid;
 }
 
-/* Pegou do bootstrap */
-/* .container { 
-    padding: 20px;
-    max-width: 1400px;
-    width: 100vw;
-} */
-
 h2 {
-    font-size: 1.3rem !important;
+    font-size: 1.3rem
 }
 
 .btn {

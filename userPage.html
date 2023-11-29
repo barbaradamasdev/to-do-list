@@ -4,21 +4,94 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="userStyle.css">
     <link rel="stylesheet" href="style.css">
     <script src="userScript.js"></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>MilkBark - To-Do List</title>
 </head>
-<body class="flex">
+<body>
     <header>
         <div class="container flex">
             <p class="welcome">Seja bem vindo(a), <span>Nome!</span></p>
             <p class="logout">Sair</p>
         </div>
     </header>
+
+    <section class="dashboard container">
+        <h1>Gerenciador galático de tarefas</h1>
+
+        <section class="new_task">
+            <form>
+                <div class="form-group">
+                  <input type="text" placeholder="Tarefa" class="form-control" id="task_nome" required>
+                </div>
+                <div class="form-group row">
+                    <div class="col">
+                        <input type="text" placeholder="Data início" class="form-control" id="task_data_inicio" onfocus="(this.type='date')" onblur="(this.type='text')" required/>
+                    </div>
+                    <div class="col">
+                        <input type="text" placeholder="Hora início" class="form-control" id="task_hora_inicio" onfocus="(this.type='time')" onblur="(this.type='text')" required >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col">
+                        <input type="text" placeholder="Data término" class="form-control" id="task_data_termino" onfocus="(this.type='date')" onblur="(this.type='text')" required/>
+                    </div>
+                    <div class="col">
+                        <input type="text" placeholder="Hora término" class="form-control" id="task_hora_termino" onfocus="(this.type='time')" onblur="(this.type='text')" required >
+                    </div>
+                </div>
+                <div class="form-group">
+                  <textarea placeholder="Descrição" class="form-control" id="task_descricao" cols="30" rows="5" ></textarea>
+                </div>
+                <button type="submit" onclick="addTarefa()" class="btn create-task">Criar tarefa</button>
+              </form>
+        </section>
+
+        <section class="dashboard_tasks table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Tarefa</th>
+                    <th scope="col">Início</th>
+                    <th scope="col">Término</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Editar</th>
+                  </tr>
+                </thead>
+                <tbody class="">
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>date</td>
+                    <td><button class="btn">Alterar</button></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>date</td>
+                    <td><button class="btn">Alterar</button></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>@twidate</td>
+                    <td><button class="btn">Alterar</button></td>
+                  </tr>
+                </tbody>
+              </table>
+        </section>
+    </section>
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

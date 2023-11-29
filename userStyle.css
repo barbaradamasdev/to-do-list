@@ -4,19 +4,62 @@
     --font-bold: 'Anton', sans-serif;
     --font-context-principal: 'Roboto', sans-serif;
     --font-context-secondary: 'Oswald', sans-serif;
+
+    --pink-light: pink;
+    --pink-dark:  rgb(235, 139, 155);
+    --purple: purple;
 }
 
 /* Reset */
 header {
-    background-color: pink;
+    background-color: var(--pink-dark);
     width: 100vw;
 }
 
 .container {
     justify-content: space-between !important;
     align-items: center;
+    padding-top: 15px;
 }
 
-/* .logout {
-    justify-self: right;
-} */
+.welcome span {
+    font-weight: 600;
+}
+
+/* Dashboard */
+
+h1 {
+    text-align: center;
+}
+
+.new_task {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.row {
+    flex-direction: column;
+}
+
+.row > * + * {
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+@media screen and (min-width: 370px) {
+    .row {
+        flex-direction: row;
+    }
+
+    .row > * + * {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+}
+
+.table td, .table th {
+    border: none;
+}
