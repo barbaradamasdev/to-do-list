@@ -35,3 +35,22 @@ function formatDate(dateString) {
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
     return new Date(dateString).toLocaleDateString('pt-BR', options);
 }
+
+// Atualizar tabela na insercao no html
+function updateTable(nome, email, tarefa) {
+    var table = document.getElementById('table');
+
+    var novaLinha = table.insertRow();
+
+    var colTarefa = novaLinha.insertCell(0);
+    var colInicio = novaLinha.insertCell(1);
+    var colTermino = novaLinha.insertCell(2);
+    var colStatus = novaLinha.insertCell(3);
+    var colEditar = novaLinha.insertCell(4);
+
+    colTarefa.textContent = tarefa.tarefa;
+    colInicio.textContent = formatDate(tarefa.inicio) + ' às ' + tarefa.horario_inicio;
+    colTermino.textContent = formatDate(tarefa.termino) + ' às ' + tarefa.horario_termino;
+    colStatus.textContent = tarefa.status;
+    colEditar.innerHTML = '<button class="btn">Alterar</button>'
+}
