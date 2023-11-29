@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+    --font-bold: 'Anton', sans-serif;
+    --font-context-principal: 'Roboto', sans-serif;
+    --font-context-secondary: 'Oswald', sans-serif;
+
+    --pink-light: pink;
+    --pink-dark:  rgb(235, 139, 155);
+}
+
+/* Reset */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-context-principal);
+}
+
+/* Global settings */
+
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.grid {
+    display: grid;
+}
+
+/* Pegou do bootstrap */
+/* .container { 
+    padding: 20px;
+    max-width: 1400px;
+    width: 100vw;
+} */
+
+h2 {
+    font-size: 1.3rem !important;
+}
+
+.btn {
+    background-color: var(--pink-light);
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: var(--pink-dark);
+}
