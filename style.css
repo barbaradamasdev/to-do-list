@@ -26,13 +26,13 @@
 
 /* Global settings */
 
+body {
+  overflow-x: hidden;
+}
+
 .flex {
   display: flex;
   justify-content: center;
-}
-
-.grid {
-  display: grid;
 }
 
 h2 {
@@ -47,6 +47,7 @@ h2 {
 
 .btn:hover {
   background-color: var(--pink08);
+  color: white;
 }
 
 input,

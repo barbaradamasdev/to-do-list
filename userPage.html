@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="userStyle.css">
     
@@ -15,13 +14,13 @@
 <body>
     <header>
         <div class="container flex">
-            <p class="welcome">Seja bem vindo(a), <span>Bárbara!</span></p>
-            <p class="logout">Sair</p>
+            <p class="header-welcome-msg">Seja bem vindo(a), <span id="nome-usuario"></span></p>
+            <button class="btn-hidden logout" style="color:white" onclick="sair()">Sair</button>
         </div>
     </header>
 
     <!-- Modal Descricao -->
-    <div class="modal fade" id="modal-task-description-card" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modal-task-description-card" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
@@ -36,7 +35,6 @@
 
                 <div class="modal-footer" id="modal-task-description-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-task-edit-card">Alterar</button> -->
                 </div>
 
             </div>
@@ -44,49 +42,46 @@
     </div>
 
     <!-- Modal Edicao -->
-    <div class="modal fade" id="modal-task-edit-card" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modal-task-edit-card" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
                 <div class="modal-header">
                     <h5 class="modal-title">Editor de tarefas</h5>
                     <div class="wrapper">
-                        <button type="button" id="edit_new_task_button_finish" class="btn create-task" data-bs-dismiss="modal">Marcar como realizada</svg></button>
-                        <button type="button" id="edit_new_task_button_delete" class="btn create-task" data-bs-dismiss="modal"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256"><g fill="red"><path d="M200 56v152a8 8 0 0 1-8 8H64a8 8 0 0 1-8-8V56Z" opacity=".2"/><path d="M216 48h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16ZM96 40a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm96 168H64V64h128Zm-80-104v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0Zm48 0v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0Z"/></g></svg> <span style="color: red">Excluir</span></button>
+                        <button type="button" id="edit-new-task-button-finish" class="btn btn-hidden" data-bs-dismiss="modal">Marcar como realizada</svg></button>
+                        <button type="button" id="edit-new-task-button-delete" class="btn btn-hidden" data-bs-dismiss="modal"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256"><g fill="red"><path d="M200 56v152a8 8 0 0 1-8 8H64a8 8 0 0 1-8-8V56Z" opacity=".2"/><path d="M216 48h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16ZM96 40a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm96 168H64V64h128Zm-80-104v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0Zm48 0v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0Z"/></g></svg> <span style="color: red">Excluir</span></button>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 </div>
 
                 <div class="modal-body" id="modal-task-edit-body">
-                    <h6 id="modal-task-edit-title"></h6>
-                    <h7 id="modal-task-edit-text"></h7>
-
-                    <form id="edit_taskForm">
+                    <form id="edit-taskForm">
                         <div class="form-group">
-                          <input type="text" placeholder="Tarefa" class="form-control" id="edit_task_nome" required>
+                          <input type="text" placeholder="Tarefa" class="form-control" id="edit-task-nome" required>
                         </div>
                         <div class="form-group row">
                             <div class="col">
-                                <input type="date" class="form-control" id="edit_task_data_inicio" data-placeholder="Data início" required/>
+                                <input type="date" class="form-control" id="edit-task-data-inicio" data-placeholder="Data início" required/>
                             </div>
                             <div class="col">
-                                <input type="time" data-placeholder="Hora início" class="form-control" id="edit_task_hora_inicio" required/>
+                                <input type="time" data-placeholder="Hora início" class="form-control" id="edit-task-hora-inicio" required/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col">
-                                <input type="date" class="form-control" id="edit_task_data_termino" data-placeholder="Data término" required/>
+                                <input type="date" class="form-control" id="edit-task-data-termino" data-placeholder="Data término" required/>
                             </div>
                             <div class="col">
-                                <input type="time" data-placeholder="Hora término" class="form-control" id="edit_task_hora_termino" required/>
+                                <input type="time" data-placeholder="Hora término" class="form-control" id="edit-task-hora-termino" required/>
                             </div>
                         </div> 
                         <div class="form-group">
-                          <textarea placeholder="Descrição" class="form-control" id="edit_task_descricao" cols="30" rows="5" ></textarea>
+                          <textarea placeholder="Descrição" class="form-control" id="edit-task-descricao" cols="30" rows="5" ></textarea>
                         </div>
-                        <div class="modal-footer" id="edit_modal-task-edit-footer">
-                            <button type="button" id="edit_new_task_button_cancel" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar edição</button>
-                            <button type="button" id="edit_new_task_button_update" class="btn create-task" data-bs-dismiss="modal">Salvar edição</button>
+                        <div class="modal-footer" id="edit-modal-task-edit-footer">
+                            <button type="button" id="edit-new-task-button-cancel" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar edição</button>
+                            <button type="button" id="edit-new-task-button-update" class="btn create-task" data-bs-dismiss="modal">Salvar edição</button>
                             
                         </div>
                       </form>
@@ -102,36 +97,36 @@
     <!-- Dashboard -->
     <section class="dashboard container">
   
-        <section class="new_task">
+        <section class="dashboard-new-task-form">
             <h2>Cadastro de novas tarefas</h2>
             <form id="taskForm">
                 <div class="form-group">
-                  <input type="text" placeholder="Tarefa" class="form-control" id="task_nome" required>
+                  <input type="text" placeholder="Tarefa" class="form-control" id="task-nome" required>
                 </div>
                 <div class="form-group row">
                     <div class="col">
-                        <input type="date" class="form-control" id="task_data_inicio" data-placeholder="Data início" required/>
+                        <input type="date" class="form-control" id="task-data-inicio" data-placeholder="Data início" required/>
                     </div>
                     <div class="col">
-                        <input type="time" data-placeholder="Hora início" class="form-control" id="task_hora_inicio" required/>
+                        <input type="time" class="form-control" id="task-hora-inicio" data-placeholder="Hora início" required/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col">
-                        <input type="date" class="form-control" id="task_data_termino" data-placeholder="Data término" disabled required/>
+                        <input type="date" class="form-control" id="task-data-termino" data-placeholder="Data término" disabled required/>
                     </div>
                     <div class="col">
-                        <input type="time" data-placeholder="Hora término" class="form-control" id="task_hora_termino" required/>
+                        <input type="time" class="form-control" id="task-hora-termino" data-placeholder="Hora término" required/>
                     </div>
                 </div> 
                 <div class="form-group">
-                  <textarea placeholder="Descrição" class="form-control" id="task_descricao" cols="30" rows="5" ></textarea>
+                  <textarea placeholder="Descrição" class="form-control" id="task-descricao" cols="30" rows="2"></textarea>
                 </div>
-                <button type="button" onclick="adicionarDadosAoJSON()" id="new_task_button" class="btn create-task">Criar tarefa</button>
+                <button type="button" onclick="adicionarDadosAoJSON()" id="new-task-button" class="btn create-task">Criar tarefa</button>
               </form>
         </section>
 
-        <section class="dashboard_tasks table-responsive">
+        <section class="dashboard-tasks table-responsive">
             <h2>Tarefas cadastradas</h2>
             <table class="table table-striped" id="table">
                 <thead class="table">
@@ -143,9 +138,7 @@
                     <th scope="col"></th>
                   </tr>
                 </thead>
-                <tbody class="">
-                  <tr id="tableTarefaNome">
-                  </tr>
+                <tbody>
                 </tbody>
               </table>
         </section>

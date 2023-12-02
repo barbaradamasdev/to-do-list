@@ -1,5 +1,4 @@
 let usuarioLogado;
-let usuario
 
 // Funcao para logar usuario
 function entrar(){
@@ -10,12 +9,11 @@ function entrar(){
   const jsonData = localStorage.getItem('dados.json');
   const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
 
-  usuario = data.usuarios.find(usuario => usuario.email === email);
+  const usuario = data.usuarios.find(usuario => usuario.email === email);
   
   // Verificar se o usuário foi encontrado e a senha está correta
   if (usuario && usuario.password === password) {
     usuarioLogado = usuario.id;
-    localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
     alert('Login bem-sucedido! Redirecionando...');
     setTimeout(function () {
       window.location.href = 'userPage.html';
@@ -78,34 +76,21 @@ async function hashPassword(password) {
   return hashedPassword;
 }
 
-function sair(){
-  // Carregar JSON existente (se houver)
-  //const usuarioParaDeslogar = localStorage.getItem('usuarioLogado.json');
-  localStorage.removeItem('usuarioLogado');
-  usuarioLogado = null;
-  alert('Você está sendo deslogado! Redirecionando...');
-    setTimeout(function () {
-      window.location.href = 'index.html';
-  }, 1000);
-}
-
 // Carregar dados do localStorage ao carregar a página
 document.addEventListener('DOMContentLoaded', function () {
     const usuarioLogadoJSON = localStorage.getItem('usuarioLogado');
 
     if (usuarioLogadoJSON) {
-      
-      // Carregar dados do localStorage ao carregar a página
-      const jsonData = localStorage.getItem('dados.json');
-      const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
-      
-      // Encontrar o usuário pelo ID
-      usuarioLogado = JSON.parse(usuarioLogadoJSON);
-      usuario = data.usuarios.find(user => user.id === usuarioLogado);
-      console.log(usuarioLogado)
-
+        usuarioLogado = JSON.parse(usuarioLogadoJSON);
         // Atualizar a página com as informações do usuário, se necessário
-        document.getElementById('nome-usuario').innerText = usuario.nome;
+        document.getElementById('nome-usuario').innerText = usuarioLogado.nome;
+
+        // Carregar dados do localStorage ao carregar a página
+        const jsonData = localStorage.getItem('dados.json');
+        const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
+
+        // Encontrar o usuário pelo ID
+        const usuario = data.usuarios.find(user => user.id === usuarioLogado.id);
 
         // Atualizar a tabela com os dados carregados
         atualizarTabela(usuario);
@@ -119,39 +104,34 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// Verificar se a página atual é dashboard.html
-if (window.location.pathname.includes('userPage.html')) {
+//Data inicial a partir de hoje
+const today = new Date().toISOString().split('T')[0]; 
+document.getElementById('task_data_inicio').setAttribute('min', today);
 
-  // Data inicial a partir de hoje
-  const today = new Date().toISOString().split('T')[0]; 
-  document.getElementById('task-data-inicio').setAttribute('min', today);
+// Data final a partir da selecao da data inicial
+document.getElementById('task_data_inicio').addEventListener('change', function() {
+  document.getElementById('task_data_termino').removeAttribute('disabled');
+  document.getElementById('task_data_termino').setAttribute('min', this.value);
+});
 
-  // Data final a partir da seleção da data inicial
-  document.getElementById('task-data-inicio').addEventListener('change', function() {
-      document.getElementById('task-data-termino').removeAttribute('disabled');
-      document.getElementById('task-data-termino').setAttribute('min', this.value);
-  });
+document.getElementById('edit_task_data_inicio').setAttribute('min', today);
 
-  document.getElementById('edit-task-data-inicio').setAttribute('min', today);
-
-  document.getElementById('edit-task-data-inicio').addEventListener('change', function() {
-      document.getElementById('edit-task-data-termino').setAttribute('min', this.value);;
-      document.getElementById('task-data-termino').setAttribute('min', this.value);
-  });
-}
-
+document.getElementById('edit_task_data_inicio').addEventListener('change', function() {
+  document.getElementById('edit_task_data_termino').setAttribute('min', this.value);;
+  document.getElementById('task_data_termino').setAttribute('min', this.value);
+});
   
   function adicionarDadosAoJSON() {
     // Capturar dados do formulário
-    let tarefa = document.getElementById('task-nome').value;
-    let inicioInput = document.getElementById('task-data-inicio').value;
-    let horarioInicioInput = document.getElementById('task-hora-inicio').value;
-    let terminoInput = document.getElementById('task-data-termino').value;
-    let horarioTerminoInput = document.getElementById('task-hora-termino').value;
-    let descricao = document.getElementById('task-descricao').value;
+    let tarefa = document.getElementById('task_nome').value;
+    let inicioInput = document.getElementById('task_data_inicio').value;
+    let horarioInicioInput = document.getElementById('task_hora_inicio').value;
+    let terminoInput = document.getElementById('task_data_termino').value;
+    let horarioTerminoInput = document.getElementById('task_hora_termino').value;
+    let descricao = document.getElementById('task_descricao').value;
     let status = 'Pendente';
 
-    if (descricao.length <= 0) {
+    /* if (descricao.length <= 0) {
         descricao = "Não há descrição!";
     }
 
@@ -173,12 +153,14 @@ if (window.location.pathname.includes('userPage.html')) {
     if (horarioTerminoInput.length <= 0) {
         alert('Por favor, insira uma hora válida para Hora término.');
         return
-    }
+    } */
 
     // Carregar JSON existente (se houver)
     const jsonData = localStorage.getItem('dados.json');
     const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
-    usuario = data.usuarios.find(user => user.id === usuarioLogado);
+    usuarioLogado = localStorage.getItem('usuarioLogado.json');
+    console.log(usuarioLogado)
+    const usuario = data.usuarios.find(user => user.id === usuarioLogado.id);
     console.log(usuario)
 
     // Recuperar o valor atual do taskId do localStorage ou iniciar a partir de 0
@@ -198,33 +180,30 @@ if (window.location.pathname.includes('userPage.html')) {
     };
 
     usuario.tarefas.push(newTask);
+    console.log(usuario)
+    console.log(usuario.tarefas)
   
     // Salvar dados atualizados
     localStorage.setItem('dados.json', JSON.stringify(data));
     localStorage.setItem('taskId', taskId);
   
     // Atualizar a tabela
-    atualizarTabela();
+    atualizarTabela(usuario);
   
     // Limpar formulário
     document.getElementById('taskForm').reset();
   }
   
   // Atualizar tabela
-  function atualizarTabela() {
+  function atualizarTabela(usuario) {
     var table = document.getElementById('table');
     const tbody = table.getElementsByTagName('tbody')[0];
   
     // Limpar conteúdo atual da tabela
-    const jsonData = localStorage.getItem('dados.json');
-    const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
-    usuario = data.usuarios.find(user => user.id === usuarioLogado);
-    console.log(usuario)
-    console.log(usuarioLogado)
-
-    // Limpar conteúdo atual da tabela
-     tbody.innerHTML = usuario.tarefas.map(tarefa => {
+    tbody.innerHTML = usuario.tarefas.map(tarefa => {
         return `<tr></tr>`;
+        /* return `<tr id="tableTarefaNome">
+        </tr>`; */
     }).join('');
 
     // Adicionar dados à tabela
@@ -306,17 +285,15 @@ function abrirModalDescricao(tarefaId){
     myModal.addEventListener('shown.bs.modal', () => {
         const modalTitle = document.getElementById('modal-task-description-title');
         const modalDescription = document.getElementById('modal-task-description-text');
-        const modalFooter = document.getElementById('modal-task-description-footer');
 
         const jsonData = localStorage.getItem('dados.json');
         const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
-        usuario = data.usuarios.find(user => user.id === usuarioLogado);
+        const usuario = data ? JSON.parse(data) : { tarefas: [] };
+        console.log(usuario)
                 
         const tarefaEncontrada = usuario.tarefas.find(tarefa => tarefa.id === tarefaId);
         modalTitle.textContent = tarefaEncontrada.tarefa;
         modalDescription.textContent = tarefaEncontrada.descricao;
-        modalFooter.innerHTML = `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                 <button type="button" class="btn btn-primary" onclick="abrirModalEdicao(${tarefaEncontrada.id})" data-bs-toggle="modal" data-bs-target="#modal-task-edit-card">Alterar</button>`
     })
 }
 
@@ -327,17 +304,18 @@ function abrirModalEdicao(tarefaId){
     myModal.addEventListener('shown.bs.modal', () => {
         const jsonData = localStorage.getItem('dados.json');
         const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
-        usuario = data.usuarios.find(user => user.id === usuarioLogado);
+        const usuario = data ? JSON.parse(data) : { tarefas: [] };
+        console.log(usuario)
         
         const posicaoDaTarefa = usuario.tarefas.findIndex(tarefa => tarefa.id === tarefaId);
         const tarefaEncontrada = usuario.tarefas.find(tarefa => tarefa.id === tarefaId);
 
-        let tarefa = document.getElementById('edit-task-nome');
-        let inicioInput = document.getElementById('edit-task-data-inicio');
-        let horarioInicioInput = document.getElementById('edit-task-hora-inicio');
-        let terminoInput = document.getElementById('edit-task-data-termino');
-        let horarioTerminoInput = document.getElementById('edit-task-hora-termino');
-        let descricao = document.getElementById('edit-task-descricao');
+        let tarefa = document.getElementById('edit_task_nome');
+        let inicioInput = document.getElementById('edit_task_data_inicio');
+        let horarioInicioInput = document.getElementById('edit_task_hora_inicio');
+        let terminoInput = document.getElementById('edit_task_data_termino');
+        let horarioTerminoInput = document.getElementById('edit_task_hora_termino');
+        let descricao = document.getElementById('edit_task_descricao');
 
         tarefa.value = tarefaEncontrada.tarefa;
         inicioInput.value = tarefaEncontrada.inicio;
@@ -346,9 +324,9 @@ function abrirModalEdicao(tarefaId){
         horarioTerminoInput.value = tarefaEncontrada.horario_termino;
         descricao.value = tarefaEncontrada.descricao;
         
-        const modalFooterBtnUpdate = document.getElementById('edit-new-task-button-update');
-        const modalFooterBtnDelete = document.getElementById('edit-new-task-button-delete');
-        const modalFooterBtnFinish = document.getElementById('edit-new-task-button-finish');
+        const modalFooterBtnUpdate = document.getElementById('edit_new_task_button_update');
+        const modalFooterBtnDelete = document.getElementById('edit_new_task_button_delete');
+        const modalFooterBtnFinish = document.getElementById('edit_new_task_button_finish');
         modalFooterBtnFinish.innerHTML = tarefaEncontrada.status === 'Realizada' ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="green" d="m9 20.42l-6.21-6.21l2.83-2.83L9 14.77l9.88-9.89l2.83 2.83L9 20.42Z"/></svg> <span style="color: green">Marcar como não realizada</span>` : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="green" d="m9 20.42l-6.21-6.21l2.83-2.83L9 14.77l9.88-9.89l2.83 2.83L9 20.42Z"/></svg> <span style="color: green">Marcar como realizada</span>`;
 
         // Atualizar tarefa
@@ -361,7 +339,7 @@ function abrirModalEdicao(tarefaId){
           tarefaEncontrada.descricao = descricao.value || "Não há descrição!";
           
           localStorage.setItem('dados.json', JSON.stringify(data));
-          atualizarTabela();
+          atualizarTabela(data);
         };
 
         
@@ -370,7 +348,7 @@ function abrirModalEdicao(tarefaId){
           usuario.tarefas.splice(posicaoDaTarefa, 1);
           
           localStorage.setItem('dados.json', JSON.stringify(data));
-          atualizarTabela();
+          atualizarTabela(data);
         };
         
         // Concluir tarefa
@@ -386,7 +364,7 @@ function abrirModalEdicao(tarefaId){
           //'text-decoration: line-through';
 
           localStorage.setItem('dados.json', JSON.stringify(data));
-          atualizarTabela();
+          atualizarTabela(data);
         };
         
     })

@@ -9,13 +9,9 @@
   position: fixed;
   left: -200px;
   z-index: -1;
-  height: 100svh;
-  max-height: 1000px;
-}
-
-.space {
-  width: 600px;
-  height: 100svh;
+  /* height: clamp(900px, 100svh, 1000px); */
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .login_screen_form {
@@ -28,14 +24,12 @@
 
 .logo {
   width: 250px;
-  object-fit: contain;
 }
 
 .slogan {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   width: 80%;
   text-align: center;
-  margin-top: -15px;
 }
 
 .form {
@@ -54,6 +48,11 @@
   .login_screen_mascote,
   .space {
     display: inherit;
+  }
+
+  .space {
+    width: 600px;
+    height: 100svh;
   }
 
   .login,
