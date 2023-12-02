@@ -1,86 +1,86 @@
 /* Login screen */
 
-.login_screen_mascote, .space {
-    display: none;
+.login_screen_mascote,
+.space {
+  display: none;
 }
 
 .mascote {
-    position: fixed;
-    left: -100px;
-    z-index: -1;
-    height: 100svh;
+  position: fixed;
+  left: -200px;
+  z-index: -1;
+  height: 100svh;
+  max-height: 1000px;
 }
 
 .space {
-    width: 600px;
-    height: 100svh;
+  width: 600px;
+  height: 100svh;
 }
 
 .login_screen_form {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
-    padding: 10vh 40px;
-} 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  padding: 10vh 40px;
+}
 
 .logo {
-    width: 250px;
-    object-fit: contain;
+  width: 250px;
+  object-fit: contain;
 }
 
 .slogan {
-    font-size: 1.5rem;
-    width: 80%;
-    text-align: center;
-    margin-top: -15px;
+  font-size: 1.5rem;
+  width: 80%;
+  text-align: center;
+  margin-top: -15px;
 }
 
 .form {
-    flex-direction: column;
-    gap: 25px;
+  flex-direction: column;
+  gap: 25px;
 }
 
-.login, .signup {
-    width: 80vw;
-    max-width: 500px;
+.login,
+.signup {
+  width: 80vw;
+  max-width: 500px;
 }
 
 /* Tablet ate telas maiores */
 @media screen and (min-width: 750px) {
-    .login_screen_mascote, .space {
-        display: inherit;
-    }
+  .login_screen_mascote,
+  .space {
+    display: inherit;
+  }
 
-    .login, .signup {
-        width: 30vw;
-        margin: 20px;
-    }
+  .login,
+  .signup {
+    width: 30vw;
+    margin: 20px;
+  }
 
-    .login_screen_form {
-        padding: 40px;
-    } 
+  .login_screen_form {
+    padding: 40px;
+  }
 }
 
 /* Distancia do mascote */
-@media screen and (min-width: 750px) and (max-width: 1099px) {
-    .mascote {
-        left: -400px;
-    }
+@media screen and (min-width: 500px) and (max-width: 1200px) {
+  .mascote {
+    left: -400px;
+  }
 
-    .space {
-        margin-left: -200px;
-    }
-}
-@media screen and (min-width: 1100px) and (max-width: 1350px) {
-    .mascote {
-        left: -200px;
-    }
+  .space {
+    margin-left: -300px;
+  }
 }
 
 /* Flex direction do form para telas maiores */
 @media screen and (min-width: 1950px) {
-    .form {
-        flex-direction: row;
-    }
+  .form {
+    flex-direction: row;
+  }
 }

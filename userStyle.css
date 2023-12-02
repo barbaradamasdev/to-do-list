@@ -1,76 +1,199 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 :root {
-    --font-bold: 'Anton', sans-serif;
-    --font-context-principal: 'Roboto', sans-serif;
-    --font-context-secondary: 'Oswald', sans-serif;
+  --font-bold: "Anton", sans-serif;
+  --font-context-principal: "Roboto", sans-serif;
+  --font-context-secondary: "Oswald", sans-serif;
 
-    --pink-light: pink;
-    --pink-dark:  rgb(235, 139, 155);
-    --purple: purple;
+  --pink01: #feede9;
+  --pink02: #fdd8d3;
+  --pink03: #f9bdbb;
+  --pink04: #f3a8ad;
+  --pink05: #eb8b9b;
+  --pink06: #ca657f;
+  --pink07: #a94669;
+  --pink08: #882c55;
+  --pink09: #701a49;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 /* Reset */
 header {
-    background-color: var(--pink-dark);
-    width: 100vw;
+  background-color: #1e222d;
+  color: white;
+  width: 100vw;
 }
 
-.container {
-    justify-content: space-between !important;
-    align-items: center;
-    padding-top: 15px;
+header .container {
+  justify-content: space-between !important;
+  align-items: center;
+  padding-top: 15px;
 }
 
 .welcome span {
-    font-weight: 600;
+  font-weight: 600;
+}
+
+/* Banner */
+
+.banner {
+  background: url(imgs/bg-galaxy.jpg);
+  background-position: center;
+  width: 100vw;
+  margin: 0;
+  height: 200px;
+  display: flex;
 }
 
 /* Dashboard */
 
 h1 {
-    text-align: center;
+  margin: auto 0;
+  text-align: center;
+  width: 100%;
+  text-align: left;
+  color: white;
 }
 
 .new_task {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    margin-bottom: 20px;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .row {
-    flex-direction: column;
-}
-
-.row > * + * {
-    margin-top: 50px;
-    margin-bottom: 40px;
+  flex-direction: column;
 }
 
 @media screen and (min-width: 370px) {
-    .row {
-        flex-direction: row;
-    }
+  .row {
+    flex-direction: row;
+  }
 
-    .row > * + * {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-    
+  .row > * + * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .modal-footer {
+    flex-wrap: nowrap;
+  }
 }
 
-.table td, .table th {
-    border: none;
+.table td,
+.table th {
+  border: none;
 }
-
 
 /* Data placeholder */
-input[type="date"]::before { 
-    content: attr(data-placeholder);
-    color: rgba(92, 92, 92, 0.904);
-    width: 100%;
+input[type="date"]::before,
+input[type="time"]::before {
+  content: attr(data-placeholder);
+  color: rgba(92, 92, 92, 0.904);
+  width: 100%;
 }
 
 input[type="date"]:focus::before,
-input[type="date"]:valid::before { display: none }
+input[type="date"]:valid::before,
+input[type="time"]:focus::before,
+input[type="time"]:valid::before {
+  display: none;
+}
+
+input:disabled {
+  background-color: white !important;
+  cursor: not-allowed;
+}
+
+/* Add your modal styles here */
+.modal-footer {
+  flex-wrap: nowrap;
+}
+.btn-hidden {
+  background: transparent;
+  border: none;
+}
+
+@media screen and (max-width: 300px) {
+  .modal-footer {
+    flex-wrap: wrap;
+  }
+}
+
+#modal-task-edit-card {
+  --bs-modal-width: 900px;
+}
+
+.modal * .btn {
+  width: auto;
+}
+
+#edit_new_task_button_delete > svg,
+#edit_new_task_button_finish > svg {
+  margin-top: -5px;
+}
+
+.btn-secondary {
+  border: 1px solid var(--pink08) !important;
+  background-color: transparent !important;
+  color: var(--pink09) !important;
+}
+
+.btn-secondary:hover {
+  background-color: var(--pink03) !important;
+}
+
+th {
+  text-transform: uppercase;
+  color: #1e222d;
+  opacity: 0.6;
+}
+
+td > button[data-status] {
+  cursor: text;
+  font-weight: bold;
+  border: none;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+td > button[data-status="Em andamento"] {
+  border: 1px solid rgba(0, 0, 0, 0.329);
+}
+
+#edit_new_task_button_finish,
+#edit_new_task_button_delete {
+  background: transparent !important;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 600px) {
+  header .container {
+    padding-right: 40px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #modal-task-edit-card * .modal-header {
+    display: block;
+  }
+
+  .wrapper > * {
+    padding-left: 0;
+    text-align: left;
+  }
+
+  .wrapper > .btn-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+}
+
+tr td:first-child button {
+  font-weight: bold;
+}
