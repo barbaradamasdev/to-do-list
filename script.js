@@ -1,6 +1,6 @@
 let usuarioLogado, usuario;
 
-if (window.location.pathname.includes('/index.html')) {
+if (window.location.pathname.includes('/')) {
   setTimeout(function () {
     document.getElementById('infobtn').style.transform = 'translateX(0)';
   }, 100);
@@ -88,7 +88,7 @@ function logoutDoUsuario(){
   usuarioLogado = null;
   mensagemParaUsuario(`success`, `Você está sendo deslogado! Carregando...`, 'userpage')
     setTimeout(function () {
-      window.location.href = '/index.html';
+      window.location.href = '/';
   }, 1500);
 }
 
@@ -119,8 +119,8 @@ if (window.location.pathname.includes('/userPage.html')) {
     atualizarTabela(usuario);
 
   } else {
-    if (window.location.pathname !== '/pages/index.html') {
-      window.location.href = '/index.html';
+    if (window.location.pathname !== '/') {
+      window.location.href = '/';
     }
   }
   
