@@ -9,7 +9,7 @@
   position: fixed;
   left: -200px;
   z-index: -1;
-  /* height: clamp(900px, 100svh, 1000px); */
+  height: clamp(900px, 100svh, 1000px);
   margin-top: auto;
   margin-bottom: auto;
 }

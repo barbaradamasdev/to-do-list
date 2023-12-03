@@ -15,7 +15,7 @@
     <header>
         <div class="container flex">
             <p class="header-welcome-msg">Seja bem vindo(a), <span id="nome-usuario"></span></p>
-            <button class="btn-hidden logout" style="color:white" onclick="sair()">Sair</button>
+            <button class="btn-hidden logout" style="color:white" onclick="logoutDoUsuario()">Sair</button>
         </div>
     </header>
 
@@ -122,7 +122,7 @@
                 <div class="form-group">
                   <textarea placeholder="Descrição" class="form-control" id="task-descricao" cols="30" rows="2"></textarea>
                 </div>
-                <button type="button" onclick="adicionarDadosAoJSON()" id="new-task-button" class="btn create-task">Criar tarefa</button>
+                <button type="button" onclick="adicionarDadosAoBanco()" id="new-task-button" class="btn create-task">Criar tarefa</button>
               </form>
         </section>
 

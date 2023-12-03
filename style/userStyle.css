@@ -160,6 +160,11 @@ tr td:first-child button {
   font-weight: bold;
 }
 
+.Realizada {
+  text-decoration: line-through;
+  color: rgba(128, 128, 128, 0.493);
+}
+
 @media screen and (max-width: 300px) {
   .modal-footer {
     flex-wrap: wrap;
