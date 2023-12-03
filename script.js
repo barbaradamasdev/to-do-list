@@ -234,8 +234,8 @@ function atualizarTabela() {
       let statusTarefa  = retornarStatus(tarefa, inicioCombinado, terminoCombinado);
 
       colunaTarefa.innerHTML = `<button type="button" onclick="abrirModalDescricao(${tarefa.id})" class="btn-hidden ${statusTarefa.status}" data-bs-toggle="modal" data-bs-target="#modal-task-description-card" style="font">${tarefa.tarefa}</button>`;
-      colunaInicio.textContent = formatarData(tarefa.inicio) + ' às ' + tarefa.horario_inicio;
-      colunaTermino.textContent = formatarData(tarefa.termino) + ' às ' + tarefa.horario_termino;
+      colunaInicio.innerHTML = `<button type="button" onclick="abrirModalDescricao(${tarefa.id})" class="btn-hidden ${statusTarefa.status}" data-bs-toggle="modal" data-bs-target="#modal-task-description-card" style="font">${formatarData(tarefa.inicio) + ' às ' + tarefa.horario_inicio}</button>`;
+      colunaTermino.innerHTML = `<button type="button" onclick="abrirModalDescricao(${tarefa.id})" class="btn-hidden ${statusTarefa.status}" data-bs-toggle="modal" data-bs-target="#modal-task-description-card" style="font">${formatarData(tarefa.termino) + ' às ' + tarefa.horario_termino}</button>`;
       colunaStatus.innerHTML = `<button style="background-color: ${statusTarefa.color}" data-status="${statusTarefa.status}">${statusTarefa.status}</button>`;
       colunaEditar.innerHTML = `<button type="button" onclick="abrirModalEdicao(${tarefa.id})" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-task-edit-card">Alterar</button>`;
   });
