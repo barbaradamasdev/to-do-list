@@ -76,7 +76,7 @@ textarea {
 
 body {
   flex-direction: column;
-  min-height: 100vh; /* Garante que o contêiner da página ocupe pelo menos 100% da altura da viewport */
+  min-height: 100svh; /* Garante que o contêiner da página ocupe pelo menos 100% da altura da viewport */
 }
 
 footer {
