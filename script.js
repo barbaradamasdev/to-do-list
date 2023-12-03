@@ -26,7 +26,7 @@ if (window.location.pathname.includes('/')) {
       localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
       mensagemParaUsuario(`success`, 'Login bem-sucedido! Carregando...', 'login')
       setTimeout(function () {
-        window.location.href = '/userPage.html';
+        window.location.href = '/userPage';
       }, 1500);
     } else {
       mensagemParaUsuario(`danger`, 'Email ou senha incorretos. Tente novamente.', 'login')
@@ -68,7 +68,7 @@ if (window.location.pathname.includes('/')) {
 
     mensagemParaUsuario(`success`, `Cadastro realizado com sucesso! Carregando...`, 'login')
     setTimeout(function () {
-      window.location.href = '/userPage.html';
+      window.location.href = '/userPage';
   }, 1500);
   };
 
@@ -105,7 +105,7 @@ function mensagemParaUsuario(tipo, mensagem, pagina){
   alerta.append(wrapper);
 }
 
-if (window.location.pathname.includes('/userPage.html')) {
+if (window.location.pathname.includes('/userPage')) {
   const usuarioLogadoJSON = localStorage.getItem('usuarioLogado');
 
   if (usuarioLogadoJSON) {
