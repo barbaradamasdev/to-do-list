@@ -1,7 +1,7 @@
 # Gerenciador de Tarefas - SharpCoders
 ### Desafio Fast Track - Ima Tech: Gerenciador de Tarefas
 
-Desenvolvimento de um sistema responsivo para gerenciamento de tarefas. O objetivo é aplicar conhecimentos do bootcamp para criar um sistema responsivo de gerenciamento de tarefas, seguindo diretrizes e wireframes.
+Desenvolvimento de um sistema responsivo para gerenciamento de tarefas, aplicando conhecimentos do bootcamp e seguindo diretrizes e wireframes.
 
 ![wireframe](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/mockup-loginpage.png?raw=true)
 [Live View do Projeto](https://main--aquamarine-haupia-cbf593.netlify.app/)
@@ -39,7 +39,7 @@ Desenvolvimento de um sistema responsivo para gerenciamento de tarefas. O objeti
 - Ao clicar na tarefa, abrir modal com a descrição.
 - Botão para alterar tarefas com formulário preenchido automaticamente
 - Botões para: Alterar tarefa, Remover tarefa, Marcar como realizada e Cancelar
-- Tarefas realizadas têm botão Marcar como não realizada
+- Tarefas realizadas têm botão "Marcar como não realizada"
 
 **Barra Superior**
 - Mensagem com nome do cliente
@@ -49,13 +49,13 @@ Desenvolvimento de um sistema responsivo para gerenciamento de tarefas. O objeti
 ## 🚀 Implementações e comentários
 
 ### ⭐ Responsividade
-O bootstrap já é focado em responsividade e para as implementações utilizando ele foi rápida, além disso fiz alguns breakpoints modificando manualmente no css puro.
+O Bootstrap foi usado para facilitar a responsividade, com alguns ajustes manuais no CSS para breakpoints específicos.
 
 ### ⭐ Boostrap
-Utilizei modal, formulário e alertas, sendo alguns ainda estilizados no CSS para complementar.
+Modal, formulário e alertas foram implementados usando Bootstrap, com estilos adicionais em CSS.
 
 ### ⭐ Root
-Utilizei root no css para facilitar a padronização de cores e uso de variáveis.
+Usei variáveis CSS em :root para padronizar cores e fontes no projeto.
 
 ```
 :root {
@@ -75,7 +75,7 @@ Utilizei root no css para facilitar a padronização de cores e uso de variávei
 }
 ```
 ### ⭐ Data Placeholder
-Para os inputs do tipo **date** e **time** utilizei o atributo html data para aparecer um placeholder e facilitar o entendimento do usuário sem precisar usar labels.
+Criei placeholders visuais para inputs do tipo date e time usando o atributo data-placeholder.
 
 ```
 /* Data placeholder */
@@ -95,11 +95,10 @@ input[type="time"]:valid::before {
 ```
 
 ### ⭐ Footer e animações
-Incluí um footer com informações profissionais e uma animação alternativa ao footer na homepage utilizando keyframes.
+Adicionei um footer com informações profissionais e uma animação alternativa na homepage.
 
 ---
 ## 📌 Tecnologias auxiliares
-Para criação da marca utilizei:
 
 | Tecnologia | Uso | Site |
 | ------ | ------ | ------ |
@@ -113,8 +112,7 @@ Para criação da marca utilizei:
 | Netlify | Deploy | https://www.netlify.com/
 
 ### 🚀 Deploy
-O deploy deste projeto pode ser acessado na página abaixo:
-[https://main--aquamarine-haupia-cbf593.netlify.app/](https://main--aquamarine-haupia-cbf593.netlify.app/)
+O projeto está disponível para visualização [aqui](https://main--aquamarine-haupia-cbf593.netlify.app/)
 
 ### 🐼 Autora
 Bárbara Damasceno
