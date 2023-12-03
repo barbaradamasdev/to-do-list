@@ -1,7 +1,5 @@
 let usuarioLogado, usuario;
 
-// LOGIN
-
 function loginDoUsuario(){
   let email = document.getElementById('login-email').value;
   let password = document.getElementById('login-password').value;
@@ -12,18 +10,21 @@ function loginDoUsuario(){
   usuario = data.usuarios.find(usuario => usuario.email === email);
   
   if (usuario && usuario.password === password) {
-    usuarioLogado = usuario.id;
+    usuarioLogado = usuario;
+    console.log(usuarioLogado)
     localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
-    alert('Login bem-sucedido! Redirecionando...');
+    mensagemParaUsuario(`success`, 'Login bem-sucedido! Redirecionando...', 'login')
     setTimeout(function () {
       window.location.href = 'userPage.html';
-  }, 0500);
+    }, 1500);
   } else {
-    alert('Email ou senha incorretos. Tente novamente.');
+    mensagemParaUsuario(`danger`, 'Email ou senha incorretos. Tente novamente.', 'login')
+    setTimeout(function () {
+      const alerta = document.getElementById(`alerta-login`)
+      alerta.innerHTML = ''; 
+    }, 3000);
   }
 }
-
-// CADASTRO
 
 function cadastrarNovoUsuario(){
     let nome = document.getElementById('cadastro-nome').value;
@@ -53,14 +54,13 @@ function cadastrarNovoUsuario(){
     usuarioLogado = novoUsuario;
     localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
 
-    alert("Cadastro realizado com sucesso! Redirecionando...");
+    mensagemParaUsuario(`success`, `Cadastro realizado com sucesso! Redirecionando...`, 'login')
     setTimeout(function () {
       window.location.href = 'userPage.html';
-  }, 0500);
+  }, 1500);
 }
 
-// CRIPTOGRAFIA (funciona com backend)
-
+// Criptografia de senha (não utilizar com localStorage)
 async function criptografarPassword(password) {
   const encoder = new TextEncoder();
   const data = encoder.encode(password);
@@ -70,43 +70,47 @@ async function criptografarPassword(password) {
   return hashedPassword;
 }
 
-// LOGOUT
-
 function logoutDoUsuario(){
   localStorage.removeItem('usuarioLogado');
   usuarioLogado = null;
-  alert('Você está sendo deslogado! Redirecionando...');
+  mensagemParaUsuario(`success`, `Você está sendo deslogado! Redirecionando...`, 'userpage')
     setTimeout(function () {
       window.location.href = 'index.html';
-  }, 0500);
+  }, 1500);
 }
 
-// DOM LOADED => Todas as paginas
+function mensagemParaUsuario(tipo, mensagem, pagina){
+  const alerta = document.getElementById(`alerta-${pagina}`)
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<div class="alert alert-${tipo} alert-dismissible" role="alert">`,
+    `   <div>${mensagem}</div>`,
+    `   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`,
+    `</div>`
+  ].join('')
 
-document.addEventListener('DOMContentLoaded', function () {
-    const usuarioLogadoJSON = localStorage.getItem('usuarioLogado');
-
-    if (usuarioLogadoJSON) {
-      const jsonData = localStorage.getItem('dados.json');
-      const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
-      
-      usuarioLogado = JSON.parse(usuarioLogadoJSON);
-      usuario = data.usuarios.find(user => user.id === usuarioLogado);
-
-      document.getElementById('nome-usuario').innerText = usuario.nome;
-      atualizarTabela(usuario);
-
-    } else {
-      if (window.location.pathname !== '/pages/index.html') {
-        window.location.href = 'index.html';
-      }
-    }
-});
-
-
-// DOM LOADED => USER PAGE
+  alerta.append(wrapper);
+}
 
 if (window.location.pathname.includes('userPage.html')) {
+  const usuarioLogadoJSON = localStorage.getItem('usuarioLogado');
+
+  if (usuarioLogadoJSON) {
+    const jsonData = localStorage.getItem('dados.json');
+    const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
+    
+    usuarioLogado = JSON.parse(usuarioLogadoJSON);
+    usuario = data.usuarios.find(user => user.id === usuarioLogado.id);
+
+    document.getElementById('nome-usuario').innerText = usuario.nome;
+    atualizarTabela(usuario);
+
+  } else {
+    if (window.location.pathname !== '/pages/index.html') {
+      window.location.href = 'index.html';
+    }
+  }
+  
   const dataDeHoje = new Date().toISOString().split('T')[0]; 
 
   document.getElementById('task-data-inicio').setAttribute('min', dataDeHoje);
@@ -123,8 +127,6 @@ if (window.location.pathname.includes('userPage.html')) {
       document.getElementById('task-data-termino').setAttribute('min', this.value);
   });
 }
-
-// ADICIONA DADOS DO CADASTRO
 
 function adicionarDadosAoBanco() {
   let tarefa = document.getElementById('task-nome').value;
@@ -161,7 +163,7 @@ function adicionarDadosAoBanco() {
 
   const jsonData = localStorage.getItem('dados.json');
   const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
-  usuario = data.usuarios.find(user => user.id === usuarioLogado);
+  usuario = data.usuarios.find(user => user.id === usuarioLogado.id);
 
   let taskId = parseInt(localStorage.getItem('taskId')) || 0;
   taskId++;
@@ -186,15 +188,13 @@ function adicionarDadosAoBanco() {
   document.getElementById('taskForm').reset();
 }
 
-// ATUALIZAR TABELA
-
 function atualizarTabela() {
   var table = document.getElementById('table');
   const tbody = table.getElementsByTagName('tbody')[0];
 
   const jsonData = localStorage.getItem('dados.json');
   const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
-  usuario = data.usuarios.find(user => user.id === usuarioLogado);
+  usuario = data.usuarios.find(user => user.id === usuarioLogado.id);
 
   tbody.innerHTML = usuario.tarefas.map(tarefa => {
       return `<tr></tr>`;
@@ -209,29 +209,25 @@ function atualizarTabela() {
       var colunaStatus = novaLinha.insertCell(3);
       var colunaEditar = novaLinha.insertCell(4);
 
-      let inicioCombinado = combineDateTime(formatDate(tarefa.inicio), tarefa.horario_inicio);
-      let terminoCombinado = combineDateTime(formatDate(tarefa.termino), tarefa.horario_termino);
+      let inicioCombinado = combinarDataHorario(formatarData(tarefa.inicio), tarefa.horario_inicio);
+      let terminoCombinado = combinarDataHorario(formatarData(tarefa.termino), tarefa.horario_termino);
       
-      let statusTarefa  = getStatus(tarefa, inicioCombinado, terminoCombinado);
+      let statusTarefa  = retornarStatus(tarefa, inicioCombinado, terminoCombinado);
 
       colunaTarefa.innerHTML = `<button type="button" onclick="abrirModalDescricao(${tarefa.id})" class="btn-hidden ${statusTarefa.status}" data-bs-toggle="modal" data-bs-target="#modal-task-description-card" style="font">${tarefa.tarefa}</button>`;
-      colunaInicio.textContent = formatDate(tarefa.inicio) + ' às ' + tarefa.horario_inicio;
-      colunaTermino.textContent = formatDate(tarefa.termino) + ' às ' + tarefa.horario_termino;
+      colunaInicio.textContent = formatarData(tarefa.inicio) + ' às ' + tarefa.horario_inicio;
+      colunaTermino.textContent = formatarData(tarefa.termino) + ' às ' + tarefa.horario_termino;
       colunaStatus.innerHTML = `<button style="background-color: ${statusTarefa.color}" data-status="${statusTarefa.status}">${statusTarefa.status}</button>`;
       colunaEditar.innerHTML = `<button type="button" onclick="abrirModalEdicao(${tarefa.id})" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-task-edit-card">Alterar</button>`;
   });
 }
 
-// FORMATA DATA
-
-function formatDate(dateString) {
+function formatarData(dateString) {
   const options = { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' };
   return new Date(dateString).toLocaleDateString('pt-BR', options);
 }
-  
-// COMBINA DATA E HORA
 
-function combineDateTime(dateString, timeString) {
+function combinarDataHorario(dateString, timeString) {
   // Create Date object from date and time strings
   const parts = dateString.split('/')
   const day = parseInt(parts[0], 10);
@@ -246,9 +242,7 @@ function combineDateTime(dateString, timeString) {
   return date; 
 }
 
-// STATUS DA TAREFA
-
-function getStatus(tarefa, startDate, endDate) {
+function retornarStatus(tarefa, startDate, endDate) {
   const currentDate = new Date();
     
   if (tarefa.status == 'Realizada') {
@@ -273,8 +267,6 @@ function getStatus(tarefa, startDate, endDate) {
 
 }
 
-// MODAL COM DESCRICAO
-
 function abrirModalDescricao(tarefaId){
     const myModal = document.getElementById('modal-task-description-card');
 
@@ -285,7 +277,7 @@ function abrirModalDescricao(tarefaId){
 
         const jsonData = localStorage.getItem('dados.json');
         const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
-        usuario = data.usuarios.find(user => user.id === usuarioLogado);
+        usuario = data.usuarios.find(user => user.id === usuarioLogado.id);
                 
         const tarefaEncontrada = usuario.tarefas.find(tarefa => tarefa.id === tarefaId);
         modalTitulo.textContent = tarefaEncontrada.tarefa;
@@ -295,15 +287,13 @@ function abrirModalDescricao(tarefaId){
     })
 }
 
-// MODAL PARA EDICAO
-
 function abrirModalEdicao(tarefaId){
     const myModal = document.getElementById('modal-task-edit-card');
 
     myModal.addEventListener('shown.bs.modal', () => {
         const jsonData = localStorage.getItem('dados.json');
         const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
-        usuario = data.usuarios.find(user => user.id === usuarioLogado);
+        usuario = data.usuarios.find(user => user.id === usuarioLogado.id);
         
         const posicaoDaTarefa = usuario.tarefas.findIndex(tarefa => tarefa.id === tarefaId);
         const tarefaEncontrada = usuario.tarefas.find(tarefa => tarefa.id === tarefaId);

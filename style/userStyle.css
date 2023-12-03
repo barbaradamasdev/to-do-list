@@ -40,7 +40,8 @@ header .container {
 /* Banner */
 
 .banner {
-  background: url(/pages/imgs/bg-galaxy.jpg);
+  background: url(/pages/imgs/bg-galaxy.jpg) no-repeat;
+  background-size: cover;
   background-position: center;
   width: 100vw;
   margin: 0;

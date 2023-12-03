@@ -37,6 +37,10 @@
   gap: 25px;
 }
 
+form button {
+  margin-top: 10px;
+}
+
 .login,
 .signup {
   width: 80vw;

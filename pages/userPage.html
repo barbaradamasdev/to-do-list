@@ -15,9 +15,12 @@
     <header>
         <div class="container flex">
             <p class="header-welcome-msg">Seja bem vindo(a), <span id="nome-usuario"></span></p>
-            <button class="btn-hidden logout" style="color:white" onclick="logoutDoUsuario()">Sair</button>
+            <button class="btn-hidden logout" id="ativarAlertaLoggout" style="color:white" onclick="logoutDoUsuario()">Sair</button>
         </div>
     </header>
+
+    <!-- Alerta avisos -->
+    <div id="alerta-userpage"></div>    
 
     <!-- Modal Descricao -->
     <div class="modal fade" id="modal-task-description-card" tabindex="-1">

@@ -58,3 +58,16 @@ textarea {
 textarea {
   margin-bottom: 10px;
 }
+
+
+/* Alert */
+
+#alerta-login, #alerta-userpage {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  left: 20px;
+  margin: auto;
+  width: 80vw;
+  max-width: 700px;
+}
