@@ -23,33 +23,33 @@
         <!-- Login e cadastro form -->
         <div class="login_screen_form flex">
             <img class="logo" src="imgs/logo_mini.png" alt="">
-            <p class="slogan">Leve suas tarefas para uma órbita organizada!</p>
+            <p class="slogan">Não deixe que suas tarefas saiam de órbita!</p>
             <div class="form flex">
                 <div class="login">
                     <h2>Acesse sua conta:</h2>
                     <form id="login">
                         <div class="form-group">
-                            <input type="email" class="form-control"  ria-describedby="emailHelp" placeholder="Seu email" id="login-email">
+                            <input type="email" class="form-control" placeholder="Seu email" id="login-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
                         </div>
                         <div class="form-group">
                         <input type="password" class="form-control" placeholder="Sua senha" id="login-password">
                         </div>
-                        <button type="button" onclick="loginDoUsuario()" class="btn">Entrar</button>
+                        <button type="submit" class="btn">Entrar</button>
                     </form>
                 </div>
                 <div class="signup" id="signup">
                     <h2>Novo aqui? Crie sua conta:</h2>
                     <form id="cadastro">
                         <div class="form-group">
-                            <input type="text" class="form-control" aria-describedby="name" placeholder="Seu nome" id="cadastro-nome">
+                            <input type="text" class="form-control" placeholder="Seu nome" id="cadastro-nome">
                         </div>
                         <div class="form-group">
-                        <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Seu email" id="cadastro-email">
+                        <input type="email" class="form-control" placeholder="Seu email" id="cadastro-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
                     </div>
                         <div class="form-group">
                             <input type="password" class="form-control" placeholder="Sua senha" id="cadastro-password">
                         </div>
-                        <button type="button" onclick="cadastrarNovoUsuario()" class="btn">Criar conta</button>
+                        <button type="submit" class="btn">Criar conta</button>
                     </form>
                 </div>
             </div>

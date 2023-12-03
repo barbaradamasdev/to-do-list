@@ -1,32 +1,35 @@
 let usuarioLogado, usuario;
 
-function loginDoUsuario(){
-  let email = document.getElementById('login-email').value;
-  let password = document.getElementById('login-password').value;
+if (window.location.pathname.includes('index.html')) {
+  document.getElementById('login').onsubmit = function (event) {
+    event.preventDefault();
+    let email = document.getElementById('login-email').value;
+    let password = document.getElementById('login-password').value;
 
-  const jsonData = localStorage.getItem('dados.json');
-  const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
+    const jsonData = localStorage.getItem('dados.json');
+    const data = jsonData ? JSON.parse(jsonData) : { usuarios: [] };
 
-  usuario = data.usuarios.find(usuario => usuario.email === email);
+    usuario = data.usuarios.find(usuario => usuario.email === email);
+    
+    if (usuario && usuario.password === password) {
+      usuarioLogado = usuario;
+      console.log(usuarioLogado)
+      localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
+      mensagemParaUsuario(`success`, 'Login bem-sucedido! Redirecionando...', 'login')
+      setTimeout(function () {
+        window.location.href = 'userPage.html';
+      }, 1500);
+    } else {
+      mensagemParaUsuario(`danger`, 'Email ou senha incorretos. Tente novamente.', 'login')
+      setTimeout(function () {
+        const alerta = document.getElementById(`alerta-login`)
+        alerta.innerHTML = ''; 
+      }, 3000);
+    }
+  };
   
-  if (usuario && usuario.password === password) {
-    usuarioLogado = usuario;
-    console.log(usuarioLogado)
-    localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
-    mensagemParaUsuario(`success`, 'Login bem-sucedido! Redirecionando...', 'login')
-    setTimeout(function () {
-      window.location.href = 'userPage.html';
-    }, 1500);
-  } else {
-    mensagemParaUsuario(`danger`, 'Email ou senha incorretos. Tente novamente.', 'login')
-    setTimeout(function () {
-      const alerta = document.getElementById(`alerta-login`)
-      alerta.innerHTML = ''; 
-    }, 3000);
-  }
-}
-
-function cadastrarNovoUsuario(){
+  document.getElementById('cadastro').onsubmit = function (event) {
+    event.preventDefault();
     let nome = document.getElementById('cadastro-nome').value;
     let email = document.getElementById('cadastro-email').value;
     let password = document.getElementById('cadastro-password').value;
@@ -58,16 +61,17 @@ function cadastrarNovoUsuario(){
     setTimeout(function () {
       window.location.href = 'userPage.html';
   }, 1500);
-}
+  };
 
-// Criptografia de senha (não utilizar com localStorage)
-async function criptografarPassword(password) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(password);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashedPassword = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-  return hashedPassword;
+  // Criptografia de senha (não utilizar com localStorage)
+  async function criptografarPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashedPassword = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+    return hashedPassword;
+  }
 }
 
 function logoutDoUsuario(){
