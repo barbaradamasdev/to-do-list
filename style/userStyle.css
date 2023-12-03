@@ -71,7 +71,7 @@ h1 {
   flex-direction: column;
 }
 
-.nome-usuario {
+#nome-usuario {
   text-transform: capitalize;
 }
 
