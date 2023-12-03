@@ -71,6 +71,10 @@ h1 {
   flex-direction: column;
 }
 
+.nome-usuario {
+  text-transform: capitalize;
+}
+
 .table td,
 .table th {
   border: none;
