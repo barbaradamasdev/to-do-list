@@ -1,6 +1,6 @@
 let usuarioLogado, usuario;
 
-if (!window.location.pathname.includes('/userPage')) {
+if (!window.location.pathname.includes('/userpage')) {
   setTimeout(function () {
     document.getElementById('infobtn').style.transform = 'translateX(0)';
   }, 100);
@@ -26,7 +26,7 @@ if (!window.location.pathname.includes('/userPage')) {
       localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
       mensagemParaUsuario(`success`, 'Login bem-sucedido! Carregando...', 'login')
       setTimeout(function () {
-        window.location.href = '/userPage';
+        window.location.href = '/userpage';
       }, 1500);
     } else {
       mensagemParaUsuario(`danger`, 'Email ou senha incorretos. Tente novamente.', 'login')
@@ -68,7 +68,7 @@ if (!window.location.pathname.includes('/userPage')) {
 
     mensagemParaUsuario(`success`, `Cadastro realizado com sucesso! Carregando...`, 'login')
     setTimeout(function () {
-      window.location.href = '/userPage';
+      window.location.href = '/userpage';
   }, 1500);
   };
 
@@ -105,7 +105,7 @@ function mensagemParaUsuario(tipo, mensagem, pagina){
   alerta.append(wrapper);
 }
 
-if (window.location.pathname.includes('userPage')) {
+if (window.location.pathname.includes('userpage')) {
   const usuarioLogadoJSON = localStorage.getItem('usuarioLogado');
 
   if (usuarioLogadoJSON) {
