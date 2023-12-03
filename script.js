@@ -1,6 +1,15 @@
 let usuarioLogado, usuario;
 
 if (window.location.pathname.includes('index.html')) {
+  setTimeout(function () {
+    document.getElementById('infobtn').style.transform = 'translateX(0)';
+  }, 100);
+  setTimeout(function () {
+    document.getElementById('infobtn').style.animation = 'girar 2s linear infinite';
+  }, 1000);
+
+
+
   document.getElementById('login').onsubmit = function (event) {
     event.preventDefault();
     let email = document.getElementById('login-email').value;
@@ -15,7 +24,7 @@ if (window.location.pathname.includes('index.html')) {
       usuarioLogado = usuario;
       console.log(usuarioLogado)
       localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
-      mensagemParaUsuario(`success`, 'Login bem-sucedido! Redirecionando...', 'login')
+      mensagemParaUsuario(`success`, 'Login bem-sucedido! Carregando...', 'login')
       setTimeout(function () {
         window.location.href = 'userPage.html';
       }, 1500);
@@ -57,7 +66,7 @@ if (window.location.pathname.includes('index.html')) {
     usuarioLogado = novoUsuario;
     localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
 
-    mensagemParaUsuario(`success`, `Cadastro realizado com sucesso! Redirecionando...`, 'login')
+    mensagemParaUsuario(`success`, `Cadastro realizado com sucesso! Carregando...`, 'login')
     setTimeout(function () {
       window.location.href = 'userPage.html';
   }, 1500);
@@ -77,7 +86,7 @@ if (window.location.pathname.includes('index.html')) {
 function logoutDoUsuario(){
   localStorage.removeItem('usuarioLogado');
   usuarioLogado = null;
-  mensagemParaUsuario(`success`, `Você está sendo deslogado! Redirecionando...`, 'userpage')
+  mensagemParaUsuario(`success`, `Você está sendo deslogado! Carregando...`, 'userpage')
     setTimeout(function () {
       window.location.href = 'index.html';
   }, 1500);
@@ -141,8 +150,14 @@ function adicionarDadosAoBanco() {
   let descricao = document.getElementById('task-descricao').value;
   let status = 'Pendente';
 
-  if (descricao.length <= 0) {
-      descricao = "Não há descrição!";
+  if (tarefa.length <= 0) {
+    alert('Por favor, insira um nome válido para a tarefa.');
+    return
+  }
+
+  if (inicioData.length <= 0) {
+    alert('Por favor, insira uma data válida para Data início.');
+    return
   }
 
   if (inicioData.length <= 0) {
@@ -348,4 +363,9 @@ function abrirModalEdicao(tarefaId){
         };
         
     })
+}
+
+//Function to sandwich menu
+function toggleMenu () {
+  document.getElementById('infoText').classList.toggle('active');
 }
