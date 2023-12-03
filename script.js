@@ -1,6 +1,6 @@
 let usuarioLogado, usuario;
 
-if (window.location.pathname.includes('/')) {
+if (!window.location.pathname.includes('/userPage')) {
   setTimeout(function () {
     document.getElementById('infobtn').style.transform = 'translateX(0)';
   }, 100);
@@ -105,7 +105,7 @@ function mensagemParaUsuario(tipo, mensagem, pagina){
   alerta.append(wrapper);
 }
 
-if (window.location.pathname.includes('/userPage')) {
+if (window.location.pathname.includes('userPage')) {
   const usuarioLogadoJSON = localStorage.getItem('usuarioLogado');
 
   if (usuarioLogadoJSON) {
