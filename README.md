@@ -12,11 +12,22 @@ Desenvolvimento de um sistema responsivo para gerenciamento de tarefas, aplicand
 | HTML | CSS | JavaScript | Bootstrap|
 ---
 #### ❤️ Tela Final
-| ![wireframe](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/tela-login-desktop.png?raw=true)  Desktop| ![wireframe](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/tela-login-mobile.png?raw=true) Mobile |
+| ![Tela Final](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/tela-login-desktop.png?raw=true)  Desktop| ![wireframe](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/tela-login-mobile.png?raw=true) Mobile |
 | --- | --- |
 
-| ![wireframe](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/userpage-desktop-alterar.png?raw=true) Desktop| ![wireframe](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/userpage-mobile-alterar.png?raw=true) Mobile |
+| ![Tela Final](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/userpage-desktop-alterar.png?raw=true) Desktop| ![wireframe](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/userpage-mobile-alterar.png?raw=true) Mobile |
 | --- | --- |
+
+#### ✍🏻️ Features adicionais
+
+| ![Feature](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/feature-alerta-estilizado.jpg?raw=true) Alerta estilizado com bootstrap| ![Feature](https://raw.githubusercontent.com/barbaradamasdev/to-do-list/main/wireframe/feature-data-final.jpg) Data final a partir da data inicial|
+| --- | --- |
+
+| ![Feature](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/feature-validacao-email.jpg?raw=true) Validação de email no formulário| ![Feature](https://github.com/barbaradamasdev/to-do-list/blob/main/wireframe/feature-tarefa-concluida.jpg?raw=true) Tarefa concluída riscada para facilitar visualização|
+| --- | --- |
+
+
+---
 
 #### ✍🏻️ Wireframes para seguir
 
