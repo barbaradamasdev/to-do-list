@@ -147,7 +147,7 @@ function adicionarDadosAoBanco() {
   let inicioHorario = document.getElementById('task-hora-inicio').value;
   let terminoData = document.getElementById('task-data-termino').value;
   let terminoHorario = document.getElementById('task-hora-termino').value;
-  let descricao = document.getElementById('task-descricao').value;
+  let descricao = document.getElementById('task-descricao').value || "Não há descrição!";
   let status = 'Pendente';
 
   if (tarefa.length <= 0) {
