@@ -1,5 +1,5 @@
-# Gerenciador de Tarefas - SharpCoders
-### Desafio Fast Track - Ima Tech: Gerenciador de Tarefas
+# Desafio - FrontEnd - Gerenciador de Tarefas
+### SharpCoders Fast Track - Ima Tech
 
 Desenvolvimento de um sistema responsivo para gerenciamento de tarefas, aplicando conhecimentos do bootcamp e seguindo diretrizes e wireframes.
 
